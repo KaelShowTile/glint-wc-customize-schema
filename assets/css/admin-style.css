@@ -1,0 +1,37 @@
+.schema-markup-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #f9f9f9;
+}
+
+.schema-markup-item h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.schema-properties-container p {
+    margin-bottom: 10px;
+}
+
+.schema-properties-container label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.schema-properties-container input[type="text"] {
+    width: 100%;
+}
+
+.required {
+    border-color: #dc3232 !important;
+}
+
+.required + label::after {
+    content: " (Required)";
+    color: #dc3232;
+    font-weight: normal;
+}
