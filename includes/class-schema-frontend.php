@@ -257,6 +257,9 @@ class Schema_Frontend {
                         switch ( $property ) {
                             case 'get_title()':
                                 return $product->get_title();
+                            case 'get_id()':
+                                $productID = "cht" . $post->ID;
+                                return $productID;
                             case 'get_description()':
                                 $full_description = $product->get_description();
                                 $schema_description = wp_trim_words( $full_description, 99999, '' );
@@ -273,6 +276,8 @@ class Schema_Frontend {
                                 return $product->get_date_created() ? $product->get_date_created()->format( 'c' ) : '';
                             case 'get_status()':
                                 return $product->get_status();
+                            case 'get_stock_status()':
+                                return $product->get_stock_status();
                             case 'get_price()':
                                 $price = $product->get_sale_price();
                                 if(!$price){
@@ -288,6 +293,36 @@ class Schema_Frontend {
                                     'url' => $site_url
                                 );
                                 return $seller;
+                            case 'get_offers()':
+                                $price = $product->get_sale_price();
+                                $regularPrice = 0;
+                                $availability = $product->get_stock_status();
+                                if(!$price){
+                                    $price = $product->get_regular_price();
+                                    $offers[] = array(
+                                        '@type' => 'Offer',
+                                        'price' => $price,
+                                        'priceCurrency' => 'AUD',
+                                        'availability'=> $availability
+                                    );
+                                }else{
+                                    $regularPrice = $product->get_regular_price();
+                                    $Specification[] =  array(
+                                        "@type" => "UnitPriceSpecification",
+                                        "price" => $regularPrice,
+                                        "priceCurrency" => "AUD",
+                                        "priceType" => "https://schema.org/ListPrice"
+                                    );
+                                    $offers[] = array(
+                                        '@type' => 'Offer',
+                                        'price' => $price,
+                                        'priceCurrency' => 'AUD',
+                                        'availability'=> $availability,
+                                        "priceSpecification" => $Specification
+                                    );
+                                }
+                                
+                                return $offers;
                         }
                     }
                 }
