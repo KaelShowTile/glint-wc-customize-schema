@@ -85,3 +85,29 @@ class Schema_Admin {
         }
     }
 }
+
+//get sub-category by parent slug and $product
+function get_product_subcats_by_parent_slug( $product, $parent_slug ) {
+    $parent_term = get_term_by( 'slug', $parent_slug, 'product_cat' );
+    
+    if ( ! $parent_term ) {
+        return '';
+    }
+
+    $parent_id = $parent_term->term_id;
+    $product_cat_ids = $product->get_category_ids();
+    $subcat_names = array();
+
+    foreach ( $product_cat_ids as $cat_id ) {
+        $ancestors = get_ancestors( $cat_id, 'product_cat' );
+
+        if ( in_array( $parent_id, $ancestors ) ) {
+            $term = get_term( $cat_id );
+            if ( $term && ! is_wp_error( $term ) ) {
+                $subcat_names[] = $term->name;
+            }
+        }
+    }
+    
+    return implode( ', ', array_unique( $subcat_names ) );
+}

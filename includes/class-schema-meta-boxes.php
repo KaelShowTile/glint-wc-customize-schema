@@ -199,6 +199,7 @@ class Schema_Meta_Boxes {
             'product' => array(
                 array( 'key' => 'name', 'label' => 'Name', 'required' => true ),
                 array( 'key' => 'sku', 'label' => 'SKU', 'required' => false ),
+                array( 'key' => 'category', 'label' => 'Category', 'required' => false ),
                 array( 'key' => 'description', 'label' => 'Description', 'required' => false ),
                 array( 'key' => 'image', 'label' => 'Image URL', 'required' => false ),
                 array( 'key' => 'brand', 'label' => 'Brand', 'required' => false ),

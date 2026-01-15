@@ -53,6 +53,7 @@ jQuery(document).ready(function($) {
         product: [
             { key: 'name', label: 'Name', required: true },
             { key: 'sku', label: 'SKU', required: true },
+            { key: 'category', label: 'Category', required: true },
             { key: 'description', label: 'Description', required: false },
             { key: 'image', label: 'Image URL', required: false },
             { key: 'brand', label: 'Brand', required: false },

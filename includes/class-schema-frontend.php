@@ -13,10 +13,11 @@ class Schema_Frontend {
         add_action( 'wp_head', array( __CLASS__, 'disable_yoast_schema_if_needed' ), 0 );
     }
 
-    //Disable Yoast SEO schema if custom schema is present
+    //Disable Yoast SEO schema and WC default schema if custom schema is present
     public static function disable_yoast_schema_if_needed() {
         if ( defined( 'WPSEO_VERSION' ) && ! empty( self::get_schema_data_for_current_page() ) ) {
             add_filter( 'wpseo_json_ld_output', '__return_false' );
+            add_filter( 'woocommerce_structured_data_product', '__return_false' );
         }
     }
 
@@ -328,20 +329,18 @@ class Schema_Frontend {
                 }
                 break;
             case 'product-category':
+                $subCategory = "";
                 if ( function_exists( 'wc_get_product' )){
-                    $product_category = get_queried_object();
-                    //$products_query = $wp_query->posts;
-                    switch ( $property ){
-                        case 'name':
-                            return $product_category->name;
-                        case 'slug':
-                            return $product_category->slug;
-                        case 'description':
-                            return $product_category->description;
-                    }
-
+                    $product = wc_get_product( $post->ID );
+                    $subCategory = get_product_subcats_by_parent_slug( $product, $property);
+                    if($subCategory){
+                        return $subCategory;
+                    }else{
+                        return null;
+                    }  
+                }else{
+                    return null;
                 }
-                
                 break;
             case 'product-attribute':
                 if( function_exists( 'wc_get_product' ) && $post ) {
@@ -363,6 +362,7 @@ class Schema_Frontend {
                     }
                 }
                 return null;
+                break;
             case 'yoast':
                 if( $post ){
                     switch ( $property ) {
@@ -380,6 +380,7 @@ class Schema_Frontend {
                             }
                     }
                 }
+                break;
             case 'search_action_array':
                 $search_action = array();
                 $site_url = get_site_url() . '/search?q={search_term_string}';
@@ -389,6 +390,7 @@ class Schema_Frontend {
                     'query-input' => 'required name=search_term_string'
                 );
                 return $search_action;
+                break;
             case 'author-profile':
                 $authorprofile = array();
                 $authorprofile[] = array(
@@ -396,6 +398,7 @@ class Schema_Frontend {
                     'name' => $property
                 );
                 return $authorprofile;
+                break;
         }
 
         return null;
