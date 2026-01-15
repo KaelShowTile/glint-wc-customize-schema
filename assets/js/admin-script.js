@@ -57,6 +57,10 @@ jQuery(document).ready(function($) {
             { key: 'description', label: 'Description', required: false },
             { key: 'image', label: 'Image URL', required: false },
             { key: 'brand', label: 'Brand', required: false },
+            { key: 'design', label: 'Design', required: false },
+            { key: 'material', label: 'Material', required: false },
+            { key: 'colour', label: 'Colour', required: false },
+            { key: 'size', label: 'Size', required: false },
             { key: 'offers', label: 'Offers (JSON)', required: false },
             { key: 'aggregateRating', label: 'Aggregate Rating (JSON)', required: false },
             { key: 'additionalProperty', label: 'AdditionalProperty', required: false }

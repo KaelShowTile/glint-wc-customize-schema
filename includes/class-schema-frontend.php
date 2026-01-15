@@ -335,11 +335,7 @@ class Schema_Frontend {
                     $subCategory = get_product_subcats_by_parent_slug( $product, $property);
                     if($subCategory){
                         return $subCategory;
-                    }else{
-                        return null;
-                    }  
-                }else{
-                    return null;
+                    }
                 }
                 break;
             case 'product-attribute':
@@ -361,22 +357,27 @@ class Schema_Frontend {
                         return $attributes;
                     }
                 }
-                return null;
                 break;
+            case 'single-product-attribute':
+                if( function_exists( 'wc_get_product' ) && $post ) {
+                    $product = wc_get_product( $post->ID );
+                    if($product){
+                        $attr_item_value = $product->get_attribute( 'pa_' . $property );
+                        if($attr_item_value){
+                            return $attr_item_value;
+                        }   
+                    }
+                }
             case 'yoast':
                 if( $post ){
                     switch ( $property ) {
                         case 'get_breadcrumb_items()':
                             if( function_exists( 'YoastSEO' ) ){
                                 return self::get_yoast_breadcrumb_data( $post->ID );
-                            }else{
-                                return null;
                             }
                         case 'get_post_description':
                             if( function_exists( 'YoastSEO' ) ){
                                 return self::get_yoast_meta_description( $post->ID );
-                            }else{
-                                return null;
                             }
                     }
                 }

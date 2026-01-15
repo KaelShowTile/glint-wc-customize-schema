@@ -203,6 +203,10 @@ class Schema_Meta_Boxes {
                 array( 'key' => 'description', 'label' => 'Description', 'required' => false ),
                 array( 'key' => 'image', 'label' => 'Image URL', 'required' => false ),
                 array( 'key' => 'brand', 'label' => 'Brand', 'required' => false ),
+                array( 'key' => 'design', 'label' => 'Design', 'required' => false ),
+                array( 'key' => 'material', 'label' => 'Material', 'required' => false ),
+                array( 'key' => 'colour', 'label' => 'Colour', 'required' => false ),
+                array( 'key' => 'size', 'label' => 'Size', 'required' => false ),
                 array( 'key' => 'offers', 'label' => 'Offers (JSON)', 'required' => false ),
                 array( 'key' => 'aggregateRating', 'label' => 'Aggregate Rating (JSON)', 'required' => false ),
                 array( 'key' => 'additionalProperty', 'label' => 'AdditionalProperty', 'required' => false )
