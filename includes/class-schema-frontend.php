@@ -261,6 +261,9 @@ class Schema_Frontend {
                             case 'get_id()':
                                 $productID = "cht" . $post->ID;
                                 return $productID;
+                            case 'schema_id':
+                                $schemaID = get_permalink( $product->get_id() ) . '#' . $post->ID;
+                                return  $schemaID;
                             case 'get_description()':
                                 $full_description = $product->get_description();
                                 $schema_description = wp_trim_words( $full_description, 99999, '' );

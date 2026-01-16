@@ -51,6 +51,7 @@ jQuery(document).ready(function($) {
             { key: 'caption', label: 'Caption', required: false }
         ],
         product: [
+            { key: 'id', label: 'ID', required: true },
             { key: 'name', label: 'Name', required: true },
             { key: 'sku', label: 'SKU', required: true },
             { key: 'category', label: 'Category', required: true },
