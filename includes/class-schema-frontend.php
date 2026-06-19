@@ -380,13 +380,13 @@ class Schema_Frontend {
                             }
                         case 'get_post_description':
                             if( function_exists( 'YoastSEO' ) ){
-                                $meta = YoastSEO()->meta->for_post( $post_id );
+                                $meta = YoastSEO()->meta->for_post( $post->ID );
                                 $seoTescription = $meta->description;
                                 return $seoTescription;
                             }
                         case 'get_post_title':
                             if( function_exists( 'YoastSEO' ) ){
-                                $meta = YoastSEO()->meta->for_post( $post_id );
+                                $meta = YoastSEO()->meta->for_post( $post->ID );
                                 $seoTitle = $meta->title;
                                 return $seoTitle;
                             }
